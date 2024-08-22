@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no">
-  <link rel="stylesheet" href="<?= get_template_directory_uri(); ?>/assets/css/app.css" type="text/css" />
+  <link rel="stylesheet" href="<?= get_template_directory_uri() ?>/assets/css/app.css" type="text/css" />
 
   <?php
-//css
-wp_enqueue_style('font-awesome', 
-'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css');
-wp_enqueue_style('google-web-fonts', 
-'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap'
-);
+  // CSS
+  wp_enqueue_style(
+    'font-awesome',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css'
+  );
+  wp_enqueue_style(
+    'google-web-fonts',
+    // 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap',
 
-  wp_enqueue_script('jquery');//javascriptファイルを読み込む
+    'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap',
+    [],
+    null
+  );
+
+  // JS
+  wp_enqueue_script('jquery'); //JavaScriptファイルを読み込む
   wp_enqueue_script(
-    'food-science-main', 
+    'food-science-main',
     get_template_directory_uri() . '/assets/js/main.js'
-  ); 
-  wp_head(); 
+  );
+  wp_head();
   ?>
 </head>
 
@@ -33,16 +42,18 @@ wp_enqueue_style('google-web-fonts',
     <div class="header_nav">
       <div class="header_menu js-menu-icon"><span></span></div>
       <div class="gnav js-menu">
-        <ul>
-          <li><a href="concept.html">コンセプト</a></li>
-          <li><a href="food.html">メニュー</a></li>
-          <li><a href="access.html">アクセス</a></li>
-          <li><a href="category.html">最新情報</a></li>
-        </ul>
+        <?php
+        $args = [
+          'menu' => 'global-navigation', // 管理画面で作成したメニューの名前
+          'menu_class' => '', //メニューを構成するulタグのクラス名// 
+          'container' => false, // ulタグを囲むdivタグを作成しない
+        ];
+        wp_nav_menu($args);
+        ?>
 
         <div class="header_info">
-          <form class="header_search">
-            <input type="text" aria-label="Search">
+          <form action="<php echo esc_url('/'); ?>" method="get" class="header_search">
+            <input type="text" name="s" value="<?php the_search_query(); ?>" aria-label="Search">
             <button type="submit"><i class="fas fa-search"></i></button>
           </form>
 

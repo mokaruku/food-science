@@ -10,11 +10,14 @@
     </div>
     <section class="footer_sns">
       <h3>SHARE ON</h3>
-      <ul>
-        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-      </ul>
+      <?php 
+      $args = [
+'menu' => 'footer-sns', // 管理画面で作成したメニューの名前
+'menu_class' => '',
+'container' => false, //メニューを構成するulタグのクラス名
+      ];
+      wp_nav_menu($args);
+      ?>
     </section>
     <div class="footer_copyright">
       <small>&copy; FOOD SCIENCE All rights reserved.</small>
@@ -25,19 +28,26 @@
 <div class="pageTop js-toTop">
   <a href="#"><i class="fas fa-arrow-up"></i><span>TOP PAGE</span></a>
 </div>
+
 <?php
-if( is_home() ) {
-  wp_enqueue_style( 
-    'slick-carousel', 
-    'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css');
-  wp_enqueue_script( 
-    'slick-carousel', 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js');
+if (is_home()) {
+  wp_enqueue_style(
+    'slick-carousel',
+    'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css'
+  );
   wp_enqueue_script(
-    'food-science-home' , get_template_directory_uri() . '/assets/js/home.js');
+    'slick-carousel',
+    'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js'
+  );
+  wp_enqueue_script(
+    'food-science-home',
+    get_template_directory_uri() . '/assets/js/home.js'
+  );
 }
 ?>
 
 <?php wp_footer(); ?>
+
 </body>
 
 </html>
