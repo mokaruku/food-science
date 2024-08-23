@@ -42,7 +42,7 @@
         スパイシーでヘルシーな本場の味をお楽しみ下さい。
       </p>
       <div class="section_btn">
-        <a href=<?= get_permalink(34); ?>
+        <a href="<?= get_permalink(34); ?>"
          class="btn btn-more">もっと見る</a>
       </div>
     </div>
@@ -57,9 +57,9 @@
 
         <?php
         $news = get_term_by('slug', 'news', 'category');
-        $news_link = get_term_link($news, 'category');
+        $news_link = get_term_link($news);
         ?>
-        <div class="section_headerBtn"><a href="<?php echo $news_link; ?>" class="btn btn-more">もっと見る</a></div>
+        <div class="section_headerBtn"><a href="<?= $news_link; ?>" class="btn btn-more">もっと見る</a></div>
       </header>
 
       <div class="section_body">

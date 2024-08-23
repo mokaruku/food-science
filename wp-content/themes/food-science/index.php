@@ -42,6 +42,14 @@
             <?php endwhile; ?>
           </div>
         <?php endif; ?>
+
+        <?php if(function_exists('wp_pagenavi')): ?>
+          <div class="paginotion">
+            <?php wp_pagenavi(); ?>
+
+          </div>
+        <?php endif; ?>
+        </div>
       </div>
     </div>
   </section>

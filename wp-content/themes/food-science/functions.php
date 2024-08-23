@@ -17,3 +17,35 @@ function my_document_title_separator($separator)
   return $separator;
 }
 
+// ContactForm7の出力の際にｐタグが勝手に入らないようにする
+add_filter('wpcf7_autop_or_not', 'my_wpcf7_autop');
+function my_wpcf7_autop()
+{
+  return false;
+}
+
+
+//ショートコードテスト
+//ショートコード用関数
+
+// $test = [
+//   'text' => 'あいうえお',
+// ];
+
+function shortcode_test($test, $content = null)
+{
+  $default = [
+    'text' => 'テキスト',
+    'link' => '',
+  ];
+  $test = shortcode_atts($default, $test);
+
+
+  $html = $content . 'ショートコードテスト' . $test['text'] . "({$test['link']})";
+
+  return $html;
+}
+
+//ショートコードの登録
+//add_shortcode('ショートコード名', '呼び出す関数名');
+add_shortcode('sc-test', 'shortcode_test');
