@@ -8,26 +8,31 @@
         </div>
 
         <div class="section_body">
+          <?php if ( have_posts()) :?>
             <div class="section_desc">
-                <p><i class="fas fa-search"></i> 検索ワード「メニュー」</p>
+                <p><i class="fas fa-search"></i> 検索ワード「<?php the_search_query(); ?>」</p>
             </div>
 
             <div class="cardList">
+<?php while (have_posts()): the_post(); ?>
 
-              <section class="cardList_item">
-                <a href="#" class="card">
-                  <div class="card_label"><span class="label label-black">お知らせ</span></div>
-                  <div class="card_pic">
-                    <img src="assets/img/home/news_img01@2x.png" alt="">
-                  </div>
-                  <div class="card_body">
-                    <h2 class="card_title">タイトルが入ります。タイトルが入ります。タイトルが入ります。タイトルが入ります。</h2>
-                    <time datetime="2022-01-25">2022年01月25日更新</time>
-                  </div>
-                </a>
-              </section>
+<?php get_template_part('template-parts/loop', 'news'); ?>
 
-            </div>
+<?php endwhile; ?>
+     </div>
+<?php else: ?>
+  <div class="section_desc">
+    <p>検索結果はありませんでした</p>
+</div>
+
+      <?php endif; ?>
+
+      <?php if(function_exists('wp_pagenavi')): ?>
+          <div class="paginotion">
+            <?php wp_pagenavi(); ?>
+          </div>
+        <?php endif; ?>
+
           </div>
 
       </div>
