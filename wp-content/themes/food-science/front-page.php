@@ -7,19 +7,35 @@
       <p class="kv_subtitle">FROM JAPAN</p>
     </div>
 
-    <div class="kv_slider js-slider">
-      <div class="kv_sliderItem" style="background-image: url('<?= get_template_directory_uri() ?>/assets/img/home/kv-01@2x.jpg');"></div>
-      <div class="kv_sliderItem" style="background-image: url('<?= get_template_directory_uri() ?>/assets/img/home/kv-02@2x.jpg');"></div>
-      <div class="kv_sliderItem" style="background-image: url('<?= get_template_directory_uri() ?>/assets/img/home/kv-03@2x.jpg');"></div>
-    </div>
-    <div class="kv_overlay"></div>
+    <?php
+    $args = [
+      'post_type' => 'main-visual',
+      'posts_per_page' => -1, //メインビジュアルが切り替わるようになる
+    ];
+    $the_query = new WP_Query($args);
+    if ($the_query->have_posts()):
+    ?>
+      <div class="kv_slider js-slider">
+        <?php while ($the_query->have_posts()): $the_query->the_post();
+          $pic = get_field('pic');
+        ?>
+          <div class="kv_sliderItem" style="background-image: url('<?php echo $pic['url']; ?>');"></div>
+        <?php endwhile; ?>
+        <?php wp_reset_postdata(); ?>
+        </div>
+      <?php endif; ?>
 
-    <div class="kv_scroll">
-      <a href="#concept" class="kv_scrollLink">
-        <p>SCROLL DOWN</p>
-        <div class="kv_scrollIcon"><i class="fa-solid fa-chevron-down"></i></div>
-      </a>
-    </div>
+      <div class="kv_sliderItem" style="background-image: url('<?= get_template_directory_uri() ?>/assets/img/home/kv-01@2x.jpg');"></div>
+
+      </div>
+      <div class="kv_overlay"></div>
+
+      <div class="kv_scroll">
+        <a href="#concept" class="kv_scrollLink">
+          <p>SCROLL DOWN</p>
+          <div class="kv_scrollIcon"><i class="fa-solid fa-chevron-down"></i></div>
+        </a>
+      </div>
   </section>
 <?php endif; ?>
 
@@ -43,7 +59,7 @@
       </p>
       <div class="section_btn">
         <a href="<?= get_permalink(34); ?>"
-         class="btn btn-more">もっと見る</a>
+          class="btn btn-more">もっと見る</a>
       </div>
     </div>
   </div>
@@ -130,4 +146,3 @@
 </section>
 
 <?php get_footer(); ?>
-
