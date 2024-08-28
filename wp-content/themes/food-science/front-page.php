@@ -12,6 +12,24 @@
       'post_type' => 'main-visual',
       'posts_per_page' => -1, //メインビジュアルが切り替わるようになる
     ];
+    $meta_query = ['relation' => 'OR'];
+    //公開終了日が未来のもの
+    $meta_query[] = [
+      'key' => 'end_date',
+      'type' => 'DATETIME',
+      'compare' => '>', //比較（end_dateの日付と現在の日時を比較）
+      'value' => date('Y-m-d H:i:s'), //現在の日時と比較
+    ];
+    //公開終了日が空のもの
+    $meta_query[] = [
+      'key' => 'end_date',
+      'value' => ''];
+      $meta_query[] = [
+        'key' => 'end_date',
+        'compare' =>'NOT EXISTS'];
+
+    $args['meta_query'] = $meta_query;
+        
     $the_query = new WP_Query($args);
     if ($the_query->have_posts()):
     ?>

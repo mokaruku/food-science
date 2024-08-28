@@ -1,4 +1,12 @@
 <?php
+
+// タイムゾーン設定
+function my_timezone()
+{
+  date_default_timezone_set('Asia/Tokyo');
+}
+add_action('after_setup_theme', 'my_timezone');
+
 // タイトルタグを有効化する
 add_theme_support('title-tag');
 // アイキャッチ画像を有効化する
