@@ -7,12 +7,21 @@ function my_timezone()
 }
 add_action('after_setup_theme', 'my_timezone');
 
+add_action('after_setup_theme', 'my_theme_setup');
+function my_theme_setup()
+{
 // タイトルタグを有効化する
 add_theme_support('title-tag');
 // アイキャッチ画像を有効化する
 add_theme_support('post-thumbnails');
 // メニューを有効化する
 add_theme_support('menus');
+
+// エディタースタイルを有効化する
+add_theme_support('editor-styles');
+add_editor_style('assets\css\editor-style.css');
+}
+
 // titleタグの区切り文字を変更する
 add_filter('document_title_separator', 'my_document_title_separator');
 function my_document_title_separator($separator)
