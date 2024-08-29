@@ -25,20 +25,6 @@
               $args = [
                 'post_type' => 'food',
                 'posts_per_page' => -1, //全件取得
-
-                //[],[],[],...条件を配列で指定（複数ある場合は配列を必要数用意する
-                //下記は先生のやり方
-                // $args = [
-                //   'post_type' => 'food',
-                //   'posts_per_page' => -1,
-                //   'tax_query' => [array(
-                  
-                
-                // [
-                //   'taxonomy' => 'menu',
-                //   'terms' => $menu->slug,
-                //   'field' => 'slug',
-                // ]
               ];
               //メニューの種類で絞り込む
               $taxquerysp = ['relation' => 'AND'];
@@ -58,6 +44,7 @@
                     <?php get_template_part('template-parts/loop', 'food'); ?>
                   </li>
                 <?php endwhile; ?>
+                <?php wp_reset_postdata(); ?>
               <?php endif; ?>
 
             </ul>
@@ -69,3 +56,7 @@
 </main>
 
 <?php get_footer(); ?>
+
+             
+
+

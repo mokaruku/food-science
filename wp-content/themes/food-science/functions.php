@@ -1,6 +1,9 @@
 <?php
 
 // タイムゾーン設定
+
+use function FakerPress\register;
+
 function my_timezone()
 {
   date_default_timezone_set('Asia/Tokyo');
@@ -101,3 +104,5 @@ HTML;
   return $html;
 }
 add_filter('the_password_form', 'my_password_form');
+
+
