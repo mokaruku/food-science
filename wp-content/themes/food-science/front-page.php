@@ -163,4 +163,24 @@
   </div>
 </section>
 
+<div id="menu"></div>
+<script>
+  async function get_food_data() {
+  const response = await fetch('<?= get_rest_url(); ?>' + 'wp/v2/food')
+const data = await response.json()
+console.log(data)
+let html = ''
+data.forEach(item => {
+  html += `
+  <p>${item.title.rendered} - ${item.acf.price}円</p>
+  `
+})
+
+const menu = document.querySelector('#menu')
+menu.insertAdjacentElement('beforeend', html)
+}
+
+get_food_dara()
+</script>
+
 <?php get_footer(); ?>
