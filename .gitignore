@@ -47,3 +47,12 @@ wp-config.php
 # uncomment the next line
 #/wp-content/themes
 /wp-content/upgrade
+
+
+/wp-content\ai1wm-backups
+
+/wp-content/updraft
+
+.DS_Store
+
+/wp-content/ai1wm-backups
