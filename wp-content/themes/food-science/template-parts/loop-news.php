@@ -15,11 +15,7 @@
       </div>
     <?php endif; ?>
     <div class="card_pic">
-      <?php if (has_post_thumbnail()): ?>
-        <?php the_post_thumbnail('medium'); ?>
-      <?php else: ?>
-        <img src="<?= get_template_directory_uri(); ?>/assets/img/common/noimage.png" alt="">
-      <?php endif; ?>
+      <?php display_thumbnail(); ?>
     </div>
     <div class="card_body">
       <h2 class="card_title"><?php the_title(); ?></h2>
