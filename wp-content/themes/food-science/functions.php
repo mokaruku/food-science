@@ -1,30 +1,32 @@
 <?php
 
+include get_template_directory() . '/includes/settings.php';
+
+
+function my_content_font()
+{
+  wp_enqueue_style('content-font', 'https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap', ['wp-edit-blocks']);
+}
+add_action('enqueue_block_editor_assets', 'my_content_font', 100);
 // タイムゾーン設定
-
-use function FakerPress\register;
-
 function my_timezone()
 {
   date_default_timezone_set('Asia/Tokyo');
 }
 add_action('after_setup_theme', 'my_timezone');
-
 add_action('after_setup_theme', 'my_theme_setup');
 function my_theme_setup()
 {
-// タイトルタグを有効化する
-add_theme_support('title-tag');
-// アイキャッチ画像を有効化する
-add_theme_support('post-thumbnails');
-// メニューを有効化する
-add_theme_support('menus');
-
-// エディタースタイルを有効化する
-add_theme_support('editor-styles');
-add_editor_style('assets\css\editor-style.css');
+  // タイトルタグを有効化する
+  add_theme_support('title-tag');
+  // アイキャッチ画像を有効化する
+  add_theme_support('post-thumbnails');
+  // メニューを有効化する
+  add_theme_support('menus');
+  // エディタースタイルを有効化する
+  add_theme_support('editor-styles');
+  add_editor_style('assets/css/editor-style.css');
 }
-
 // titleタグの区切り文字を変更する
 add_filter('document_title_separator', 'my_document_title_separator');
 function my_document_title_separator($separator)
@@ -73,8 +75,6 @@ function my_pre_get_posts($query)
     return;
   }
 }
-
-
 /**
  * パスワード保護中のページのタイトルから「保護中」の文字を削除する
  * 
@@ -84,14 +84,12 @@ function my_protected_title()
 {
   return '%s';
 }
-
 /**
  * パスワード保護フォームをカスタマイズする
  */
 function my_password_form()
 {
   remove_filter('the_content', 'wpautop');
-
   $wp_login_url = wp_login_url();
   $html = <<<HTML
   <p>パスワードを入力してください。</p>
@@ -100,9 +98,21 @@ function my_password_form()
     <input type="submit" name="Submit" value="送信">
 </form>
 HTML;
-
   return $html;
 }
 add_filter('the_password_form', 'my_password_form');
 
 
+/**
+ * ループ内でアイキャッチ画像を表示する（無い場合はnoimageを表示)
+ * 
+ * @return void
+ */
+function display_thumbnail()
+{
+  if (has_post_thumbnail()):
+    the_post_thumbnail('medium');
+  else:
+    echo '<img src="' . get_template_directory_uri() . '/assets/img/common/noimage.png" alt="">';
+  endif;
+}
